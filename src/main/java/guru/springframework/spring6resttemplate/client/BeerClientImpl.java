@@ -22,7 +22,7 @@ public class BeerClientImpl implements BeerClient {
     private final RestTemplateBuilder restTemplateBuilder;
 
     public static final String GET_BEER_PATH = "/api/v1/beer";
-    public static final String GET_BEER_BY_ID_PATH = "/api/v2/beer/{beerId}";
+    public static final String GET_BEER_BY_ID_PATH = "/api/v1/beer/{beerId}";
 
     @Override
     public Page<BeerDTO> listBeers() {
@@ -62,7 +62,7 @@ public class BeerClientImpl implements BeerClient {
     @Override
     public BeerDTO updateBeer(BeerDTO beerDTO) {
         RestTemplate restTemplate = restTemplateBuilder.build();
-        restTemplate.put(GET_BEER_BY_ID_PATH, beerDTO.getId());
+        restTemplate.put(GET_BEER_BY_ID_PATH, beerDTO, beerDTO.getId());
         return getBeerById(beerDTO.getId());
     }
 
